@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harrison Ndungu | ICT Services Specialist & Technical Trainer</title>
+  <style>
+    /* Global Styles & Variables */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary-color: #0077b6;
+      --secondary-color: #023e8a;
+      --top-blue-dark: #03045e;
+      --top-blue-mid: #0077b6;
+      --light-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --accent-color: #e67e22;
+      --open-work-green: #2e7d32;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top Header Banner */
+    .top-header {
+      background: linear-gradient(135deg, var(--top-blue-dark) 0%, var(--top-blue-mid) 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 30px 20px 25px 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .top-header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-header h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffffff;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .top-header p {
+      font-size: 1.15rem;
+      color: #90e0ef;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .opentowork-badge {
+      display: inline-block;
+      background-color: var(--open-work-green);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Navigation Bar */
+    header {
+      background-color: var(--top-blue-dark);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-bottom: 3px solid #00b4d8;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-tabs {
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: #caf0f8;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nav-tab-btn:hover,
+    .nav-tab-btn.active {
+      color: #ffffff;
+      background-color: #00b4d8;
+      box-shadow: 0 2px 8px rgba(0, 180, 216, 0.3);
+    }
+
+    .nav-tab-btn.eportfolio-link {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .nav-tab-btn.eportfolio-link:hover {
+      background-color: #d35400;
+      box-shadow: 0 2px 8px rgba(211, 84, 0, 0.3);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 35px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .page-tab {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .page-tab.active-page {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 2.2rem;
+      color: #03045e;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+      font-size: 1.05rem;
+    }
+
+    /* Slideshow Component */
+    .hero-slideshow {
+      position: relative;
+      width: 100%;
+      margin-bottom: 40px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e7eb;
+    }
+
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background-color: #0f172a;
+    }
+
+    .slide {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      background: linear-gradient(transparent, rgba(3, 4, 94, 0.95));
+      color: #fff;
+    }
+
+    .slide-overlay h3 {
+      font-size: 1.5rem;
+      color: #90e0ef;
+      margin-bottom: 5px;
+    }
+
+    .fade-anim {
+      animation: slideFade 1s ease;
+    }
+
+    @keyframes slideFade {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+
+    .dots-container {
+      text-align: center;
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 4px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: #00b4d8;
+      transform: scale(1.3);
+    }
+
+    /* Cards Grid Layout */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+      border-top: 4px solid var(--primary-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      color: #03045e;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .card ul {
+      list-style-type: square;
+      padding-left: 20px;
+      color: var(--text-muted);
+    }
+
+    .card ul li {
+      margin-bottom: 8px;
+    }
+
+    /* Portfolio Cards */
+    .portfolio-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    /* Action Buttons */
+    .btn-link, .btn-cv {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 24px;
+      background-color: var(--accent-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-link:hover, .btn-cv:hover {
+      background-color: #d35400;
+      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
+    }
+
+    .cv-container {
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      position: relative;
+      padding-left: 25px;
+      border-left: 3px solid var(--primary-color);
+      margin: 20px 0 40px 0;
+    }
+
+    .timeline-item {
+      margin-bottom: 30px;
+      position: relative;
+      background: #ffffff;
+      padding: 22px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -33px;
+      top: 22px;
+      width: 14px;
+      height: 14px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .timeline-date {
+      font-size: 0.85rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    /* About Section */
+    .about-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+      align-items: center;
+    }
+
+    .about-image {
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      max-width: 350px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      border: 4px solid var(--open-work-green);
+    }
+
+    .about-text h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      color: var(--text-main);
+    }
+
+    /* FAQ Section */
+    .faq-item {
+      background: #ffffff;
+      padding: 20px 25px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .faq-item h3 {
+      color: #03045e;
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+
+    .faq-item p {
+      color: var(--text-muted);
+    }
+
+    /* Contact Section */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .contact-info, .contact-form {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+    }
+
+    .info-item {
+      margin-bottom: 20px;
+    }
+
+    .info-item h4 {
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .info-item a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .info-item a:hover {
+      text-decoration: underline;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #03045e;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      background-color: #f8fafc;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .btn-submit {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--secondary-color);
+      box-shadow: 0 4px 12px rgba(2, 62, 138, 0.3);
+    }
+
+    /* Toast Notification */
+    .toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #2e7d32;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 14px;
+      position: fixed;
+      z-index: 2000;
+      bottom: 30px;
+      right: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .toast.show {
+      visibility: visible;
+      animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /* Bottom Marquee */
+    .bottom-marquee {
+      background-color: #0077b6;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 10px 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--top-blue-dark);
+      color: #caf0f8;
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      border-top: 3px solid #00b4d8;
+    }
+
+    @media (max-width: 768px) {
+      .about-container, .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .slideshow-container {
+        height: 320px;
+      }
+      .top-header h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Title Header -->
+  <div class="top-header">
+    <div class="top-header-content">
+      <h1>Harrison Ndungu</h1>
+      <p>ICT Services Specialist & Technical Trainer</p>
+      <span class="opentowork-badge">#OPENTOWORK</span>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav>
+      <ul class="nav-tabs">
+        <li><button class="nav-tab-btn active" onclick="openTab('home', this)">Home</button></li>
+        <li><button class="nav-tab-btn" onclick="openTab('services', this)">Services</button></li>
+        <li><button class="nav-tab-btn" onclick="openTab('portfolio', this)">Portfolio</button></li>
+        <li><button class="nav-tab-btn" onclick="openTab('experience', this)">Experience</button></li>
+        <li><button class="nav-tab-btn" onclick="openTab('about', this)">About</button></li>
+        <li><button class="nav-tab-btn" onclick="openTab('testimonials', this)">Testimonials</button></li>
+        <li><button class="nav-tab-btn" onclick="openTab('faq', this)">FAQ</button></li>
+        <li><button class="nav-tab-btn" onclick="openTab('contact', this)">Contact</button></li>
+        <li><a href="https://sites.google.com/view/ndush/home" target="_blank" class="nav-tab-btn eportfolio-link">E-Portfolio 🔗</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main>
+    <!-- HOME TAB -->
+    <section id="home" class="page-tab active-page">
+      <div class="hero-slideshow">
+        <div class="slideshow-container">
+          <div class="slide fade-anim">
+            <img src="1.jpeg" alt="Development Workstation">
+            <div class="slide-overlay">
+              <h3>Harrison Ndungu | #OPENTOWORK</h3>
+              <p>ICT Services Specialist & Technical Trainer</p>
+            </div>
+          </div>
+          <div class="slide fade-anim">
+            <img src="2.jpeg" alt="Hardware & Dual Display Workstation">
+            <div class="slide-overlay">
+              <h3>Computer Repair & Maintenance</h3>
+              <p>Professional diagnostic tests, system recovery, and preventive maintenance.</p>
+            </div>
+          </div>
+          <div class="slide fade-anim">
+            <img src="3.jpeg" alt="Clean Technical Workspace">
+            <div class="slide-overlay">
+              <h3>Advanced Technical Workshop</h3>
+              <p>State-of-the-art repair benches, component-level troubleshooting, and hardware diagnostics.</p>
+            </div>
+          </div>
+          <div class="slide fade-anim">
+            <img src="4.jpeg" alt="Professional IT Laptop Workspace">
+            <div class="slide-overlay">
+              <h3>Professional IT Consultancy</h3>
+              <p>End-to-end ICT advisory, infrastructure audits, and technical project management.</p>
+            </div>
+          </div>
+          <div class="slide fade-anim">
+            <img src="5.jpeg" alt="Custom PC Workstation">
+            <div class="slide-overlay">
+              <h3>Software & Web Development</h3>
+              <p>Custom web platforms, responsive portals, and backend database integration.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dots-container">
+          <span class="dot" onclick="setSlide(0)"></span>
+          <span class="dot" onclick="setSlide(1)"></span>
+          <span class="dot" onclick="setSlide(2)"></span>
+          <span class="dot" onclick="setSlide(3)"></span>
+          <span class="dot" onclick="setSlide(4)"></span>
+        </div>
+      </div>
+
+      <h2 class="section-title">ICT Solutions & Expertise - Ready to Join Your Team</h2>
+      <p class="section-subtitle">A dedicated specialist seeking roles in ICT services, network administration, software development, and TVET technical training.</p>
+    </section>
+
+    <!-- SERVICES TAB -->
+    <section id="services" class="page-tab">
+      <h2 class="section-title">Technical Services & Academic Programs</h2>
+      <p class="section-subtitle">Covering TVET CDACC, KNEC computer studies, and professional short courses.</p>
+      
+      <div class="grid-container">
+        <div class="card">
+          <h3>Computer Repair & Maintenance</h3>
+          <ul>
+            <li>Hardware diagnostics and replacement</li>
+            <li>OS installation and system optimization</li>
+            <li>Antivirus and malware removal</li>
+            <li>Scheduled preventive maintenance</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Network & Wi-Fi Setup</h3>
+          <ul>
+            <li>SOHO network setup and configuration</li>
+            <li>Router, switch, and access point setup</li>
+            <li>Firewall configuration & security tuning</li>
+            <li>Structured cabling and diagnostic checks</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Software & Web Development</h3>
+          <ul>
+            <li>Android mobile app development</li>
+            <li>Responsive website design</li>
+            <li>Database design (MySQL, SQLite, Firestore)</li>
+            <li>System administration portals</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>TVET CDACC Courses</h3>
+          <ul>
+            <li>ICT Technician (Levels 4, 5 & 6)</li>
+            <li>Computer Applications (Level 3)</li>
+            <li>Computer Science (Level 6)</li>
+            <li>Computer Programming (Level 6)</li>
+            <li>Artificial Intelligence & Cyber Security (Level 6)</li>
+            <li>Data Management, Network & Telecom (Level 6)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>KNEC Computer Studies</h3>
+          <ul>
+            <li>Diploma & Certificate in ICT</li>
+            <li>Computer Systems & Maintenance</li>
+            <li>Computer Networking & Database Management</li>
+            <li>Web Design, Programming & Operations</li>
+            <li>Operating Systems, Architecture & MIS</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Professional Short Courses</h3>
+          <ul>
+            <li>Computer Packages & ICDL</li>
+            <li>Statistical Packages (SPSS, Stata)</li>
+            <li>Accounting Packages (QuickBooks, Sage, Pastel)</li>
+            <li>Advanced Excel, Web & Graphic Design</li>
+            <li>Cybersecurity Fundamentals & Digital Marketing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO TAB -->
+    <section id="portfolio" class="page-tab">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">A showcase of recently engineered applications, systems, and network projects.</p>
+      
+      <div class="grid-container">
+        <div class="card portfolio-card">
+          <img src="1.jpeg" alt="Smart Vending Systems">
+          <h3>Smart Vending Systems</h3>
+          <p>Custom mobile interface designed for automated vending machines with sales tracking and real-time database logging.</p>
+        </div>
+        <div class="card portfolio-card">
+          <img src="2.jpeg" alt="Institutional Portals">
+          <h3>Institutional Portals</h3>
+          <p>Responsive web applications built with PHP, JavaScript, and MySQL for student resource management and institutional updates.</p>
+        </div>
+        <div class="card portfolio-card">
+          <img src="3.jpeg" alt="SOHO Infrastructure">
+          <h3>SOHO Infrastructure</h3>
+          <p>Structured LAN cabling, firewall configuration, and secure Wi-Fi access point deployment for office spaces.</p>
+        </div>
+        <div class="card portfolio-card">
+          <img src="4.jpeg" alt="Library Management Prototype">
+          <h3>Library Management Prototype</h3>
+          <p>Web app prototype managing inventory indexing, user borrowing workflows, and search query tools.</p>
+        </div>
+        <div class="card portfolio-card">
+          <img src="5.jpeg" alt="Android Applications">
+          <h3>Android Applications</h3>
+          <p>Mobile applications engineered with SQLite, Firestore backend integration, and custom user controls.</p>
+        </div>
+        <div class="card portfolio-card">
+          <img src="1.jpeg" alt="Database & Statistical Dashboards">
+          <h3>Database & Statistical Dashboards</h3>
+          <p>Statistical reporting and data analysis templates configured for SPSS, Stata, and QuickBooks reporting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE TAB -->
+    <section id="experience" class="page-tab">
+      <h2 class="section-title">Experience & Training</h2>
+      <p class="section-subtitle">A timeline of technical consultancy, system operations, and pedagogical training.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2024 - Present</div>
+          <h3>Harrison Ndungu (Independent Consultant)</h3>
+          <p><strong>Seeking ICT & Technical Training Opportunities:</strong> Providing expert ICT consultancy while actively exploring new full-time and project-based opportunities in TVET curriculum delivery, systems maintenance, and infrastructure setup.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2024 - 2025</div>
+          <h3>Harrison (KSTVET Education)</h3>
+          <p><strong>Seeking ICT & Education Roles:</strong> Completed pedagogical training and TVET framework curriculum preparation at the Kenya School of Technical and Vocational Education and Training (KSTVET).</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2022 - 2024</div>
+          <h3>Systems & Support Specialist</h3>
+          <p>Managed SOHO network setups, diagnostic procedures, PC hardware maintenance, and statistical/accounting software deployments.</p>
+        </div>
+      </div>
+
+      <div class="cv-container">
+        <button onclick="showToast('CV Download initiated!')" class="btn-cv">VIEW FULL CV (PDF)</button>
+      </div>
+    </section>
+
+    <!-- ABOUT TAB -->
+    <section id="about" class="page-tab">
+      <h2 class="section-title">About Harrison Ndungu</h2>
+      <p class="section-subtitle">Dedicated ICT Services Specialist & Technical Trainer</p>
+
+      <div class="about-container">
+        <div class="about-image">
+          <img src="3.jpeg" alt="Harrison Ndungu Profile Photo">
+        </div>
+        <div class="about-text">
+          <h3>Professional Profile</h3>
+          <p>With a green light for new challenges, I am an experienced ICT Services Specialist and certified Technical Trainer (pedagogical training at KSTVET, 2025). I offer precision and support in mobile app development, web application engineering, database administration, and network infrastructure.</p>
+          <p>I am actively seeking full-time roles in an industrial sector or educational setting.</p>
+          <a href="https://sites.google.com/view/ndush/home" target="_blank" class="btn-link">Explore Academic E-Portfolio 🔗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS TAB -->
+    <section id="testimonials" class="page-tab">
+      <h2 class="section-title">Client Feedback</h2>
+      <p class="section-subtitle">What clients say about our technical support and services.</p>
+
+      <div class="grid-container">
+        <div class="card">
+          <p><em>"Harrison resolved our network connection issues quickly and reconfigured our office Wi-Fi for much faster speeds. Exceptional work!"</em></p>
+          <br>
+          <h4>- Local Business Client</h4>
+        </div>
+        <div class="card">
+          <p><em>"Great technical trainer and support specialist. Helped organize our system software and setup custom reporting templates."</em></p>
+          <br>
+          <h4>- TVET Institution Administrator</h4>
+        </div>
+        <div class="card">
+          <p><em>"Very reliable hardware repairs and software upgrades. Fast response and clear technical feedback every time."</em></p>
+          <br>
+          <h4>- Private Technical Client</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ TAB -->
+    <section id="faq" class="page-tab">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Common questions regarding technical support, repairs, and project timelines.</p>
+
+      <div class="faq-item">
+        <h3>How quickly can standard computer repairs or software setups be completed?</h3>
+        <p>Most hardware diagnostics, system maintenance, and software installations are completed within 24 to 48 hours depending on requirements.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do you offer on-site network setup and troubleshooting?</h3>
+        <p>Yes, on-site network deployment, structured cabling, router configuration, and Wi-Fi optimization services are available for local offices and institutions.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can you build custom mobile or web applications?</h3>
+        <p>Yes. Custom applications are developed according to specific requirements, complete with MySQL, SQLite, or Firestore database integration.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT TAB -->
+    <section id="contact" class="page-tab">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Have a technical project or job opportunity? Reach out today.</p>
+
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3>Contact Details</h3>
+          <br>
+          <div class="info-item">
+            <h4>Phone / WhatsApp</h4>
+            <p>+254 705 976 233</p>
+          </div>
+          <div class="info-item">
+            <h4>Email</h4>
+            <p><a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
+          </div>
+          <div class="info-item">
+            <h4>Academic E-Portfolio</h4>
+            <p><a href="https://sites.google.com/view/ndush/home" target="_blank">sites.google.com/view/ndush/home</a></p>
+          </div>
+          <div class="info-item">
+            <h4>Location</h4>
+            <p>Nairobi, Kenya</p>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h3>Send a Message</h3>
+          <br>
+          <form onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" required placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" required placeholder="your.email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="4" required placeholder="How can I assist you?"></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Marquee Banner -->
+  <marquee class="bottom-marquee" behavior="scroll" direction="left" scrollamount="6">
+    HARRISON NDUNGU - AVAILABLE FOR NEW ICT &amp; TECHNICAL TRAINING OPPORTUNITIES | Seeking roles in TVET curriculum, network admin, and systems development | Tel: +254 705 976 233 | Email: njorogeharrisonwanjiru@gmail.com
+  </marquee>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; Harrison Ndungu - ICT Services Specialist. All rights reserved.</p>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast" class="toast">Message sent successfully!</div>
+
+  <script>
+    /* Navigation Tab Switching */
+    function openTab(tabId, element) {
+      let pages = document.getElementsByClassName("page-tab");
+      for (let i = 0; i < pages.length; i++) {
+        pages[i].classList.remove("active-page");
+      }
+
+      let buttons = document.getElementsByClassName("nav-tab-btn");
+      for (let i = 0; i < buttons.length; i++) {
+        if (!buttons[i].classList.contains('eportfolio-link')) {
+          buttons[i].classList.remove("active");
+        }
+      }
+
+      document.getElementById(tabId).classList.add("active-page");
+      element.classList.add("active");
+    }
+
+    /* Automated Hero Slideshow */
+    let slideIndex = 0;
+    let timer;
+
+    function showSlides() {
+      let slides = document.getElementsByClassName("slide");
+      let dots = document.getElementsByClassName("dot");
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      if (slides[slideIndex - 1]) {
+        slides[slideIndex - 1].style.display = "block";
+      }
+      if (dots[slideIndex - 1]) {
+        dots[slideIndex - 1].className += " active";
+      }
+
+      timer = setTimeout(showSlides, 4500);
+    }
+
+    function setSlide(n) {
+      clearTimeout(timer);
+      slideIndex = n;
+      showSlides();
+    }
+
+    showSlides();
+
+    /* Form & Toast Notifications */
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.innerText = msg;
+      toast.className = "toast show";
+      setTimeout(function() { 
+        toast.className = toast.className.replace("show", ""); 
+      }, 3000);
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      showToast("Thank you! Your message has been sent.");
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
